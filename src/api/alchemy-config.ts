@@ -1,3 +1,5 @@
+import { ConnectionInfo } from '@ethersproject/web';
+
 import { AlchemySettings, Network } from '../types/types';
 import {
   AlchemyApiType,
@@ -7,7 +9,8 @@ import {
   DEFAULT_REQUEST_TIMEOUT,
   getAlchemyHttpUrl,
   getAlchemyNftHttpUrl,
-  getAlchemyWebhookHttpUrl
+  getAlchemyWebhookHttpUrl,
+  getPricesBaseUrl
 } from '../util/const';
 import type { AlchemyProvider } from './alchemy-provider';
 import type { AlchemyWebSocketProvider } from './alchemy-websocket-provider';
@@ -30,6 +33,8 @@ export class AlchemyConfig {
 
   /** Setting to enable automatic batching on json-rpc requests. Defaults to false.*/
   readonly batchRequests: boolean;
+
+  readonly connectionInfoOverrides?: Partial<ConnectionInfo>;
 
   /**
    * The optional hardcoded URL to send requests to instead of using the network
@@ -69,6 +74,7 @@ export class AlchemyConfig {
     this.authToken = config?.authToken;
     this.batchRequests = config?.batchRequests || false;
     this.requestTimeout = config?.requestTimeout || DEFAULT_REQUEST_TIMEOUT;
+    this.connectionInfoOverrides = config?.connectionInfoOverrides;
   }
 
   /**
@@ -86,6 +92,8 @@ export class AlchemyConfig {
       return getAlchemyNftHttpUrl(this.network, this.apiKey);
     } else if (apiType === AlchemyApiType.WEBHOOK) {
       return getAlchemyWebhookHttpUrl();
+    } else if (apiType === AlchemyApiType.PRICES) {
+      return getPricesBaseUrl(this.apiKey);
     } else {
       return getAlchemyHttpUrl(this.network, this.apiKey);
     }

@@ -6,6 +6,113 @@
 
 ### Minor Changes
 
+## 3.5.1
+
+### Minor Changes
+
+- Added many new networks
+
+## 3.5.0
+
+### Major Changes
+
+- Added a new `PricesNamespace` with three new methods: `getTokenPriceByAddress()`, `getTokenPriceBySymbol()`, `getHistoricalPriceByAddress`, and `getHistoricalPriceBySymbol()`. Access these methods via `alchemy.prices`.
+
+## 3.4.8
+
+### Minor Changes
+
+- Added networks for `FLOW`.
+
+## 3.4.7
+
+### Minor Changes
+
+- Added networks for `ROOTSTOCK`.
+
+## 3.4.6
+
+### Minor Changes
+
+- Fixed webhook network parsing in `getAllWebhooks` method for all supported networks.
+
+## 3.4.5
+
+### Minor Changes
+
+- Fixed createWebhook's `skip_empty_messages` param.
+
+## 3.4.4
+
+### Minor Changes
+
+- Added networks for `WORLDCHAIN`.
+
+## 3.4.3
+
+### Minor Changes
+
+- Added networks for `SONEIUM` and `BERACHAIN`. Note that these are primarily for `CoreNamespace` methods. Not all namespaces will work with these networks.
+
+## 3.4.2
+
+### Minor Changes
+
+- Addressed security vulnerabilities by adding overrides for `elliptic` and `ws` dependencies. Specifically:
+  - Updated `elliptic` to version `6.5.7` (latest) to fix vulnerabilities related to EDDSA signature length checks and ECDSA BER-encoded signatures.
+  - Updated `ws` to version `7.5.10` to mitigate a potential DoS vulnerability. The latest major version of `ws` is `8.x`, however, `7.5.10` is the most up-to-date version compatible with `ethers v5`, which depends on `7.x` versions of `ws`.
+
+## 3.4.1
+
+### Minor Changes
+
+- Fixed a bug where the `openSeaMetadata?.safelistRequestStatus` was undefined in the `Nft` object that resulted in a `Cannot read properties of undefined` error (#416)
+
+## 3.4.0
+
+### Major Changes
+
+- Added networks for `SHAPE`, `LINEA`, `FANTOM`, `ZETACHAIN`, `ARBNOVA`, `BLAST`, `MANTLE`, `SCROLL`, `GNOSIS`, `BNB`, `AVAX`, `CELO`, `METIS`, `OPBNB`. Note that these are primarily for `CoreNamespace` methods. Not all namespaces will work these networks.
+- App IDs are now a required property when calling `NotifyNamespace.createWebhook()` with `WebhookType.GRAPHQL`. This is not a Typescript breaking change, but rather a run-time breaking change. Calling the endpoint without an App ID will now throw an error instead of returning a 503.
+
+### Minor Changes
+
+- Fixed a bug with `NotifyNamespace.createWebhook()` when using `WebhookType.GRAPHQL`. Also added the option use `skipEmptyMessages` when creating graphQL webhooks to skip empty blocks.
+- Updated axios version to remove security warning (#443).
+
+## 3.3.1
+
+### Minor Changes
+
+- Fixed a bug where the `openSeaMetadata?.safelistRequestStatus` was undefined in the `Nft` object that resulted in a `Cannot read properties of undefined` error (#416)
+- Added support `connectionInfoOverrides` field in the `Alchemy` constructor. This allows you to override the ethers.js `ConnectionInfo` object and specify custom connection information for the underlying `JsonRpcProvider`.
+
+## 3.3.0
+
+### Major Changes
+
+- Added support for Zksync Mainnet and Sepolia via the `Network.ZKSYNC_MAINNET` and `Network.ZKSYNC_SEPOLIA` enums.
+
+### Minor Changes
+
+## 3.2.1
+
+### Major Changes
+
+- Added support for Arbitrum and Optimism Sepolia webhook creation.
+
+### Minor Changes
+
+- API error messages return the actual error instead of [Object object]
+
+## 3.2.0
+
+### Major Changes
+
+- Added support for Polygon Amoy network via the `Network.MATIC_AMOY` enum.
+
+### Minor Changes
+
 ## 3.1.2
 
 ### Major Changes
